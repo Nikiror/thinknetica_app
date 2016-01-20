@@ -1,0 +1,12 @@
+FactoryGirl.define do
+  factory :answer do
+    content "MyText"
+belongs_to "MyString"
+ ""
+index "MyString"
+true, "MyString"
+foreign_key "MyString"
+true "MyString"
+  end
+
+end
