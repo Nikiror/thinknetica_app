@@ -172,7 +172,6 @@ DEPENDENCIES
   factory_girl_rails
   jbuilder (~> 2.0)
   jquery-rails
-  minitest
   pg (~> 0.15)
   rails (= 4.2.5)
   rspec-rails
