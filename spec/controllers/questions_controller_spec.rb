@@ -59,4 +59,45 @@ let(:question) { question = create(:question) }
 			end
 		end
 	end
+
+	describe 'PATCH #update' do
+		context 'with valid attributes' do
+			it 'assigns requsted question to @question' do
+				patch :update, id: question, question: attributes_for(:question)
+				expect(assigns(:question)).to eq question
+			end
+
+			it 'changes question attributes' do
+				patch :update, id: question, question: { title: "new title", body: "new body" }
+				question.reload
+				expect(question.title).to eq 'new title'
+				expect(question.body).to eq 'new body'
+			end
+
+			it 'redirects to updated question' do
+				patch :update, id: question, question: attributes_for(:question)
+				expect(response).to redirect_to question
+			end
+		end
+
+		context 'with invalid attributes' do
+			it 'does not change question attributes' do
+				patch :update, id: question, question: { title: "new title", body: nil }
+				question.reload
+				expect(question.title).to eq 'MyString'
+				expect(question.body).to eq 'MyText'
+			end
+		end
+	end
+	describe 'DELETE #destroy' do
+		before { question }
+		it 'delete question' do
+			expect { delete :destroy, id: question }.to change(Question, :count).by(-1)
+		end
+
+		it 'redirect to index view' do
+			delete :destroy, id: question
+			expect(response).to redirect_to question_path
+		end
+	end
 end
