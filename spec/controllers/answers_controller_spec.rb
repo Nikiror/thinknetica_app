@@ -4,6 +4,17 @@ RSpec.describe AnswersController, type: :controller do
   let!(:question) { create(:question) }
   let!(:answer) { create(:answer, question: question) }
 
+  describe 'GET #new' do
+   before {get :new, question_id: question}
+    it 'assign a new Answer to @answer' do
+      expect(assigns(:answer)).to be_a_new(Answer)
+    end
+
+    it 'renders show new' do
+      expect(response).to render_template(:new)
+    end
+  end
+
   describe 'POST #create' do
    context 'with valid attributes' do
       it 'save the new answer in database' do
@@ -13,19 +24,19 @@ RSpec.describe AnswersController, type: :controller do
         post :create, id: answer, question_id: question, answer: attributes_for(:answer)
         expect(assigns(:answer).question_id).to eq answer.question_id 
       end
-      it 'render show create' do
-        post :create, id: answer, question_id: question, answer: attributes_for(:answer)
-        expect(response).to render_template :create 
+      it 'redirect to new view' do
+         post :create, id: answer, question_id: question, answer: attributes_for(:answer)
+        expect(response).to redirect_to question
       end
    end
 
    context 'with invalid attributes' do
       it 'dont save the new answer in database' do
-        expect { post :create, id: answer, question_id: question, answer: attributes_for(:invalid_answer) }.to_not change(question.answers, :count)
+        expect { post :create, id: answer, question_id: question, answer: attributes_for(:invalid_answer) }.to_not change(Answer, :count)
       end
       it 're-render new create' do
         post :create, id: answer, question_id: question, answer: attributes_for(:invalid_answer)
-        expect(response).to render_template :create 
+        expect(response).to render_template :new 
       end
    end
   end
@@ -63,7 +74,7 @@ RSpec.describe AnswersController, type: :controller do
 
     it 'redirect to question view' do
       delete :destroy, id: answer, question_id: question
-      expect(response).to redirect_to question
+      expect(response).to redirect_to question_path
     end
   end
 end
