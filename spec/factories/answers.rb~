@@ -1,12 +1,12 @@
 FactoryGirl.define do
   factory :answer do
-    content "MyText"
-belongs_to "MyString"
- ""
-index "MyString"
-true, "MyString"
-foreign_key "MyString"
-true "MyString"
+   content 
+   question
+  end
+
+   factory :invalid_answer, class: "Answer" do
+   content nil
+   question
   end
 
 end
