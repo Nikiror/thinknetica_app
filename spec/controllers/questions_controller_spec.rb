@@ -97,7 +97,7 @@ let(:question) { question = create(:question) }
 
     it 'redirect to index view' do
       delete :destroy, id: question
-      expect(response).to redirect_to question_path
+      expect(response).to redirect_to questions_path
     end
   end
 end

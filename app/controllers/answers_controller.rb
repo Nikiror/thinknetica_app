@@ -16,8 +16,7 @@ class AnswersController < ApplicationController
   end
 
   def update
-    @answer.update(answers_params)
-    if @answer.save
+    if @answer.update(answers_params)
       redirect_to @answer.question
     else
       render :new
@@ -26,7 +25,7 @@ class AnswersController < ApplicationController
 
   def destroy
     @answer.destroy
-    redirect_to question_path
+    redirect_to @answer.question
   end
 
 

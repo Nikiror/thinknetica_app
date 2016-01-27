@@ -20,10 +20,6 @@ RSpec.describe AnswersController, type: :controller do
       it 'save the new answer in database' do
         expect { post :create, id: answer, question_id: question, answer: attributes_for(:answer) }.to change(question.answers, :count).by(1)
       end
-      it 'assign @answer to question' do
-        post :create, id: answer, question_id: question, answer: attributes_for(:answer)
-        expect(assigns(:answer).question_id).to eq answer.question_id 
-      end
       it 'redirect to new view' do
          post :create, id: answer, question_id: question, answer: attributes_for(:answer)
         expect(response).to redirect_to question
@@ -74,7 +70,7 @@ RSpec.describe AnswersController, type: :controller do
 
     it 'redirect to question view' do
       delete :destroy, id: answer, question_id: question
-      expect(response).to redirect_to question_path
+      expect(response).to redirect_to question
     end
   end
 end
