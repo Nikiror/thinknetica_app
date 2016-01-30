@@ -28,7 +28,10 @@ let(:question) { question = create(:question) }
   end
 
   describe "GET #new" do
+    sign_in_user
+
     before {get :new}
+
     it 'assign a new Question to @question' do
       expect(assigns(:question)).to be_a_new(Question)
     end
@@ -39,6 +42,7 @@ let(:question) { question = create(:question) }
   end
 
   describe 'POST #create' do
+    sign_in_user
     context 'with valid attributes' do
       it 'save the new question in database' do
         expect { post :create, question: attributes_for(:question) }.to change(Question, :count).by(1)
@@ -61,6 +65,7 @@ let(:question) { question = create(:question) }
   end
 
   describe 'PATCH #update' do
+    sign_in_user
     context 'with valid attributes' do
       it 'assigns requsted question to @question' do
         patch :update, id: question, question: attributes_for(:question)
@@ -90,6 +95,7 @@ let(:question) { question = create(:question) }
     end
   end
   describe 'DELETE #destroy' do
+    sign_in_user
     before { question }
     it 'delete question' do
       expect { delete :destroy, id: question }.to change(Question, :count).by(-1)

@@ -31,7 +31,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+
 gem 'slim-rails'
+gem 'devise'
 
 group :development, :test do
   gem 'byebug'
@@ -41,6 +43,8 @@ end
 
 group :test do
   gem 'shoulda-matchers'
+  gem 'capybara'
+  gem 'launchy'
 end
     gem 'responders'
 

@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :load_question, only: [:update, :show, :destroy] 
+  before_action :authenticate_user!, except: [:index, :show]
   def index
     @questions = Question.all
   end
@@ -14,6 +15,7 @@ class QuestionsController < ApplicationController
   def create 
     @question = Question.new(question_params)
     if @question.save
+      flash[:notice] = 'Your question successfully created.'
       redirect_to @question
     else
       render :new
@@ -37,6 +39,10 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
+    params.require(:question).permit(:title, :body)
+  end
+
+  def authenticate_user
     params.require(:question).permit(:title, :body)
   end
 

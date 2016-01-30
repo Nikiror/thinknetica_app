@@ -1,0 +1,80 @@
+* [33mcommit ac3a7d93a58ac8b028b58a6a55cc80bc01fd1a79[m
+[31m|[m Author: Nikita Nikolaevsky <nikiror@gmail.com>
+[31m|[m Date:   Tue Jan 26 21:45:02 2016 +0800
+[31m|[m 
+[31m|[m     Fixed answer controller and add tests
+[31m|[m  
+* [33mcommit 9e702731c27fec1a094c6ced3d84a2426f1dadeb[m
+[31m|[m Author: Nikita Nikolaevsky <nikiror@gmail.com>
+[31m|[m Date:   Tue Jan 26 19:49:19 2016 +0800
+[31m|[m 
+[31m|[m     Edit format files
+[31m|[m  
+* [33mcommit 1ce03be2b63ef2ecc3688ffb4e4b7d2f0670a12c[m
+[31m|[m Author: Nikita Nikolaevsky <nikiror@gmail.com>
+[31m|[m Date:   Tue Jan 26 19:45:06 2016 +0800
+[31m|[m 
+[31m|[m     Edit format
+[31m|[m  
+* [33mcommit f218f5a8bea13003bd2cb3cf345d40d756d24024[m
+[31m|[m Author: Nikita Nikolaevsky <nikiror@gmail.com>
+[31m|[m Date:   Tue Jan 26 19:23:02 2016 +0800
+[31m|[m 
+[31m|[m     Create controller Answer and tests
+[31m|[m  
+* [33mcommit 20b542fcabf59a32533c6ee1d1cc3c71f2aa6124[m
+[31m|[m Author: Nikita Nikolaevsky <nikiror@gmail.com>
+[31m|[m Date:   Sat Jan 23 20:28:20 2016 +0800
+[31m|[m 
+[31m|[m     Create action update, destroy and tests to Question
+[31m|[m  
+* [33mcommit b4be97db4021651e53e1d5d4169ceacfc2a3dc2c[m
+[31m|[m Author: Nikita Nikolaevsky <nikiror@gmail.com>
+[31m|[m Date:   Sat Jan 23 19:40:56 2016 +0800
+[31m|[m 
+[31m|[m     create action index, show, new,create for controller question
+[31m|[m  
+* [33mcommit 7b1632a35395d6146779500590456e8524208f26[m
+[31m|[m Author: Nikita Nikolaevsky <nikiror@gmail.com>
+[31m|[m Date:   Sat Jan 23 13:44:12 2016 +0800
+[31m|[m 
+[31m|[m     Add slim gem
+[31m|[m    
+*   [33mcommit e73a594268530def50bbd3fb8231675a0dab00a5[m
+[32m|[m[33m\[m  Merge: 0424363 7ab0ec2
+[32m|[m [33m|[m Author: Nikiror <nikiror@gmail.com>
+[32m|[m [33m|[m Date:   Wed Jan 20 21:50:28 2016 +0700
+[32m|[m [33m|[m 
+[32m|[m [33m|[m     Merge pull request #1 from Nikiror/que-ans-model
+[32m|[m [33m|[m     
+[32m|[m [33m|[m     Que ans model
+[32m|[m [33m|[m   
+[32m|[m * [33mcommit 7ab0ec2d69481504f4faf850a8d39bb1ecf32b0b[m
+[32m|[m [33m|[m Author: Nikita Nikolaevsky <nikiror@gmail.com>
+[32m|[m [33m|[m Date:   Wed Jan 20 11:39:01 2016 +0800
+[32m|[m [33m|[m 
+[32m|[m [33m|[m     Add delete answers
+[32m|[m [33m|[m   
+[32m|[m * [33mcommit 72ce2f78b9bf0709a90e7bbee98f720713179205[m
+[32m|[m [33m|[m Author: Nikita Nikolaevsky <nikiror@gmail.com>
+[32m|[m [33m|[m Date:   Tue Jan 19 19:18:11 2016 +0800
+[32m|[m [33m|[m 
+[32m|[m [33m|[m     Create hasmany Answer for Question
+[32m|[m [33m|[m   
+[32m|[m * [33mcommit 6ebd7758b930977c963ee70dc0f24e804ba3db6b[m
+[32m|[m [33m|[m Author: Nikita Nikolaevsky <nikiror@gmail.com>
+[32m|[m [33m|[m Date:   Tue Jan 19 19:15:11 2016 +0800
+[32m|[m [33m|[m 
+[32m|[m [33m|[m     Create Answer model and tests
+[32m|[m [33m|[m   
+[32m|[m * [33mcommit 16bfaca8156e141a805b2155506dcdd9975ca670[m
+[32m|[m[32m/[m  Author: Nikita Nikolaevsky <nikiror@gmail.com>
+[32m|[m   Date:   Tue Jan 19 18:23:01 2016 +0800
+[32m|[m   
+[32m|[m       Create model of Question and tests
+[32m|[m  
+* [33mcommit 04243634ef1e5ab4ef687f411664bd73abaf8730[m
+  Author: Nikita Nikolaevsky <nikiror@gmail.com>
+  Date:   Tue Jan 19 01:38:43 2016 +0800
+  
+      Initialize project
