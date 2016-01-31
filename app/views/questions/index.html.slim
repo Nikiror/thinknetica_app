@@ -1,1 +1,12 @@
-p = link_to 'Ask question', new_question_path
+<html>
+head 
+title Questions list
+<body>
+
+= button_to 'Ask question', new_question_path 
+br
+ 
+ - @questions.each do |question| 
+  h3= link_to question.title, question_path(question)
+ </body>
+ </html>
