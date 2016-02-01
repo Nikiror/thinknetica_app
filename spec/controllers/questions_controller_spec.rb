@@ -89,8 +89,8 @@ let(:question) { question = create(:question) }
       it 'does not change question attributes' do
         patch :update, id: question, question: { title: "new title", body: nil }
         question.reload
-        expect(question.title).to eq 'MyString'
-        expect(question.body).to eq 'MyText'
+        expect(question.title).to eq 'Myquestiontitle'
+        expect(question.body).to eq 'Myquestion'
       end
     end
   end

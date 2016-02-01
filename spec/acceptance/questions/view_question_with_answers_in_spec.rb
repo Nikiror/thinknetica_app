@@ -7,7 +7,7 @@ feature 'User look questions list', %q{
 } do
   given(:user) { create(:user) }
   given(:question) { create(:question, user: user) }
-  given(:answers) { create_list(:answer, 2, question: question) }
+  given!(:answers) { create_list(:answer, 3, question: question) }
 
   scenario 'User try to see list of questions' do
     sign_in(user)
