@@ -11,6 +11,7 @@ feature 'Create question', %q{
     sign_in(user)
 
     visit questions_path 
+    
     click_on 'Ask question'
     fill_in 'Title', with: 'Test question'
     fill_in 'Text', with: 'text'

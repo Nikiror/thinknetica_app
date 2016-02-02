@@ -42,8 +42,4 @@ class QuestionsController < ApplicationController
     params.require(:question).permit(:title, :body)
   end
 
-  def authenticate_user
-    params.require(:question).permit(:title, :body)
-  end
-
 end
