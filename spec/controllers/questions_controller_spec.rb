@@ -94,16 +94,31 @@ let(:question) { question = create(:question) }
       end
     end
   end
-  describe 'DELETE #destroy' do
-    sign_in_user
-    before { question }
-    it 'delete question' do
-      expect { delete :destroy, id: question }.to change(Question, :count).by(-1)
-    end
 
-    it 'redirect to index view' do
-      delete :destroy, id: question
-      expect(response).to redirect_to questions_path
+  describe 'DELETE #destroy' do
+    context 'Authenticated user' do
+      sign_in_user
+      before { question }
+
+      context 'Author of answer' do
+        let!(:my_question) { create(:question, user: @user) }
+
+        it 'delete question' do
+          expect { delete :destroy, id: my_question }.to change(@user.questions, :count).by(-1)
+        end
+
+        it 'redirect to index view' do
+          delete :destroy, id: my_question
+          expect(response).to redirect_to questions_path
+        end
+      end
+
+       context 'Non-author of answer' do
+        it 'cant delete question' do
+          question
+          expect { delete :destroy, id: question }.to_not change(@user.questions, :count)
+        end
+      end
     end
   end
 end

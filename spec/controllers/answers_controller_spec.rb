@@ -26,7 +26,7 @@ RSpec.describe AnswersController, type: :controller do
          post :create, id: answer, question_id: question, answer: attributes_for(:answer)
         expect(response).to redirect_to question
       end
-   end
+    end
 
    context 'with invalid attributes' do
       it 'dont save the new answer in database' do
@@ -36,7 +36,7 @@ RSpec.describe AnswersController, type: :controller do
         post :create, id: answer, question_id: question, answer: attributes_for(:invalid_answer)
         expect(response).to render_template :new 
       end
-   end
+    end
   end
 
   describe 'PATCH #update' do
@@ -67,15 +67,26 @@ RSpec.describe AnswersController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    context 'sign in user' do
+    context 'Authenticated user' do
       sign_in_user
-      let!(:my_answer) { create(:answer, question: question, user: @user) }
-      it 'should delete answer from database' do
-        expect { delete :destroy, id: my_answer, question_id: my_answer.question }.to change(@user.answers, :count).by(-1)
+      context 'Author of answer' do
+        let!(:my_answer) { create(:answer, question: question, user: @user) }
+
+        it 'should delete answer from database' do
+          expect { delete :destroy, id: my_answer, question_id: my_answer.question }.to change(@user.answers, :count).by(-1)
+        end
+
+        it 'redirect to question view' do
+          delete :destroy, id: my_answer, question_id: my_answer.question
+          expect(response).to redirect_to question
+        end
       end
-      it 'redirect to question view' do
-        delete :destroy, id: answer, question_id: question
-        expect(response).to redirect_to question
+
+      context 'Non-author of answer' do
+        it 'cant delete answer from database' do
+          answer
+          expect { delete :destroy, id: answer, question_id: answer.question }.to_not change(@user.answers, :count)
+        end
       end
     end
   end
