@@ -1,9 +1,26 @@
-h1 = @question.title
-p = @question.body
-= link_to('Delete question', question_path(@question), :method =>'delete')
-br
-= link_to('Logout', destroy_user_session_path, :method =>'delete')
-br
- 
- - @question.answers.each do |answer| 
-  h3= answer.content 
+p
+  b Title:
+  = @question.title
+p 
+  b Body:
+  = @question.body
+  - if current_user == @question.user
+    = link_to('Delete question', @question, method: :delete)
+h2 Answers:
+- @question.answers.each do |answer| 
+  h3 
+    = answer.content
+    - if answer.user == current_user
+      = link_to('Delete answer', [@question, answer], method: :delete) 
+    br
+- if user_signed_in?
+  h2 Post your Answer:
+  = form_for [@question, Answer.new] do |f|
+    = f.label :content
+    br
+    = f.text_area :content
+    br
+    = f.submit 'Create answer'
+
+
+

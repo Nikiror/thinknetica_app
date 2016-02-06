@@ -1,4 +1,4 @@
-= form_for @question.answer do |f|
+= form_for [@question, @answer] do |f|
   = f.label :body, 'Text'
   = f.text_area :content
   = f.submit 'Create'

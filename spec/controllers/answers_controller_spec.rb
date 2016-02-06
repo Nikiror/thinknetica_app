@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe AnswersController, type: :controller do
   let!(:question) { create(:question) }
   let!(:answer) { create(:answer, question: question) }
-  sign_in_user
 
   describe 'GET #new' do
+    sign_in_user
     before {get :new, question_id: question}
     it 'assign a new Answer to @answer' do
       expect(assigns(:answer)).to be_a_new(Answer)
@@ -17,6 +17,7 @@ RSpec.describe AnswersController, type: :controller do
   end
 
   describe 'POST #create' do
+    sign_in_user
     context 'with valid attributes' do
       it 'save the new answer in database' do
         expect { post :create, id: answer, question_id: question, answer: attributes_for(:answer) }.to change(question.answers, :count).by(1)
@@ -39,6 +40,7 @@ RSpec.describe AnswersController, type: :controller do
   end
 
   describe 'PATCH #update' do
+    sign_in_user
     context 'with valid attributes' do
       it 'assigns requsted answer to @answer' do
         patch :update, id: answer, question_id: question, answer: attributes_for(:answer)
@@ -65,13 +67,16 @@ RSpec.describe AnswersController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    it 'should delete answer from database' do
-      expect { delete :destroy, id: answer, question_id: question }.to change(question.answers, :count).by(-1)
-    end
-
-    it 'redirect to question view' do
-      delete :destroy, id: answer, question_id: question
-      expect(response).to redirect_to question
+    context 'sign in user' do
+      sign_in_user
+      let!(:my_answer) { create(:answer, question: question, user: @user) }
+      it 'should delete answer from database' do
+        expect { delete :destroy, id: my_answer, question_id: my_answer.question }.to change(@user.answers, :count).by(-1)
+      end
+      it 'redirect to question view' do
+        delete :destroy, id: answer, question_id: question
+        expect(response).to redirect_to question
+      end
     end
   end
 end

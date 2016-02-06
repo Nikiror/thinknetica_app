@@ -12,9 +12,9 @@ feature 'Create answers to question', %q{
     sign_in(user)
     visit question_path(question)
 
-    click_on 'Answer'
+    
     fill_in 'Content', with: "Test answer"
-    click_on 'Create'
+    click_on 'Create answer'
 
     expect(current_path).to eq question_path(question)
     expect(page).to have_content 'Your answer successfully created.'
@@ -22,9 +22,8 @@ feature 'Create answers to question', %q{
 
   scenario 'Non-authenticated user creates answer' do
 
-    visit questions_path 
-    click_on 'Answer'
+    visit question_path(question)
 
-    expect(page).to have_content 'You need to sign in or sign up before continuing.'
+    expect(page).to_not have_content 'Post your Answer'
   end
 end
