@@ -19,4 +19,12 @@ feature 'Create answers to question', %q{
     expect(current_path).to eq question_path(question)
     expect(page).to have_content 'Your answer successfully created.'
   end
+
+  scenario 'Non-authenticated user creates answer' do
+
+    visit questions_path 
+    click_on 'Answer'
+
+    expect(page).to have_content 'You need to sign in or sign up before continuing.'
+  end
 end

@@ -1,12 +1,6 @@
-<html>
-head 
-title Questions list
-<body>
+= link_to 'Ask question', new_question_path
 
-= button_to 'Ask question', new_question_path
-br
- 
- - @questions.each do |question| 
-  h3= link_to question.title, question_path(question)
- </body>
- </html>
+= link_to('Logout', destroy_user_session_path, :method => 'delete')
+
+- @questions.each do |question| 
+  h3= link_to question.title, question_path(question) 

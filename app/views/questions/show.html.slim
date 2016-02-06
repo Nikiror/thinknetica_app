@@ -1,9 +1,9 @@
 h1 = @question.title
 p = @question.body
-
-= button_to 'Answer', new_question_answer_path
-
+= link_to('Delete question', question_path(@question), :method =>'delete')
+br
+= link_to('Logout', destroy_user_session_path, :method =>'delete')
 br
  
  - @question.answers.each do |answer| 
-  h3= answer.content
+  h3= answer.content 

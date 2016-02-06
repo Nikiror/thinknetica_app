@@ -1,15 +1,15 @@
 require 'rails_helper'
 
 feature 'User look questions list', %q{
-  In order to look full list of questions
+  In order to look questions list with answers
   As an User
-  I want to see list of questions
+  I want to see questions list with answers
 } do
   given(:user) { create(:user) }
   given(:question) { create(:question, user: user) }
   given!(:answers) { create_list(:answer, 3, question: question) }
 
-  scenario 'User try to see list of questions' do
+  scenario 'User try to see questions list with answers' do
     sign_in(user)
     visit question_path(question)
 
