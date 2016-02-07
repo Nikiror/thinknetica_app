@@ -4,13 +4,13 @@ p
 p 
   b Body:
   = @question.body
-  - if current_user == @question.user
+  - if current_user && current_user.author_of?(@question)
     = link_to('Delete question', @question, method: :delete)
 h2 Answers:
 - @question.answers.each do |answer| 
   h3 
     = answer.content
-    - if answer.user == current_user
+    - if current_user && current_user.author_of?(answer)
       = link_to('Delete answer', [@question, answer], method: :delete) 
     br
 - if user_signed_in?

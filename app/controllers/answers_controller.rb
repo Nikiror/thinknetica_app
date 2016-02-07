@@ -1,10 +1,8 @@
 class AnswersController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_question, only: [:create, :new]
   before_action :load_answer, only:[:update, :destroy]
-  before_action :authenticate_user!
-  def new
-    @answer  = @question.answers.new
-  end
+
 
   def create
     @answer  = @question.answers.new(answers_params.merge(user: current_user))
@@ -12,20 +10,23 @@ class AnswersController < ApplicationController
       flash[:notice] = 'Your answer successfully created.'
       redirect_to @answer.question
     else
-      render :new
+      flash[:alert] = 'Cant create answer!'
+      redirect_to @answer.question
     end
   end
 
   def update
-    if @answer.update(answers_params)
-      redirect_to @answer.question
-    else
-      render :new
-    end
+    @answer.update(answers_params)
+    redirect_to @answer.question
   end
 
   def destroy
-    @answer.destroy
+    if current_user.author_of?(@answer)
+      @answer.destroy
+      flash[:notice] = 'Your answer successfully deleted.'
+    else
+      flash[:alert] = 'You cant delete this answer!'
+    end
     redirect_to @answer.question
   end
 

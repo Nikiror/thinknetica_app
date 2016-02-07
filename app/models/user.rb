@@ -5,5 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :questions, dependent: :destroy
   has_many :answers, dependent: :destroy
-    
+
+  def author_of?(item)
+  	item.user_id==self.id
+  end
 end

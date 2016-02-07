@@ -4,18 +4,6 @@ RSpec.describe AnswersController, type: :controller do
   let!(:question) { create(:question) }
   let!(:answer) { create(:answer, question: question) }
 
-  describe 'GET #new' do
-    sign_in_user
-    before {get :new, question_id: question}
-    it 'assign a new Answer to @answer' do
-      expect(assigns(:answer)).to be_a_new(Answer)
-    end
-
-    it 'renders show new' do
-      expect(response).to render_template(:new)
-    end
-  end
-
   describe 'POST #create' do
     sign_in_user
     context 'with valid attributes' do
@@ -26,6 +14,14 @@ RSpec.describe AnswersController, type: :controller do
          post :create, id: answer, question_id: question, answer: attributes_for(:answer)
         expect(response).to redirect_to question
       end
+      it 'should assign user to @answer' do
+        post :create, id: answer, question_id: question, answer: attributes_for(:answer)
+        expect(Answer.last.user_id).to eq @user.id
+      end
+      it 'should assign question to @answer' do
+        post :create, id: answer, question_id: question, answer: attributes_for(:answer)
+        expect(Answer.last.question_id).to eq question.id
+      end
     end
 
    context 'with invalid attributes' do
@@ -34,7 +30,7 @@ RSpec.describe AnswersController, type: :controller do
       end
       it 're-render new create' do
         post :create, id: answer, question_id: question, answer: attributes_for(:invalid_answer)
-        expect(response).to render_template :new 
+        expect(response).to redirect_to question 
       end
     end
   end
@@ -85,7 +81,7 @@ RSpec.describe AnswersController, type: :controller do
       context 'Non-author of answer' do
         it 'cant delete answer from database' do
           answer
-          expect { delete :destroy, id: answer, question_id: answer.question }.to_not change(@user.answers, :count)
+          expect { delete :destroy, id: answer, question_id: answer.question }.to_not change(Answer, :count)
         end
       end
     end

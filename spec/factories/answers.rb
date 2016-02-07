@@ -1,6 +1,9 @@
 FactoryGirl.define do
+  sequence :content do |n|
+    "My answer#{n}"
+  end
   factory :answer do
-    content "My answer"
+    content
     question
     user
   end
