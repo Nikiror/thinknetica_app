@@ -22,6 +22,10 @@ let(:question) { question = create(:question) }
       expect(assigns(:question)).to eq question
     end
 
+    it 'assigns new Answer to question' do
+      expect(assigns(:answer)).to be_a_new(Answer)
+    end
+
     it 'renders show view' do
       expect(response).to render_template :show
     end
