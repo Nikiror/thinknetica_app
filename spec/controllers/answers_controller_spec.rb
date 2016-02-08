@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe AnswersController, type: :controller do
-  let!(:question) { create(:question) }
+  let(:question) { create(:question) }
   let!(:answer) { create(:answer, question: question) }
 
   describe 'POST #create' do
@@ -15,12 +15,7 @@ RSpec.describe AnswersController, type: :controller do
         expect(response).to redirect_to question
       end
       it 'should assign user to @answer' do
-        post :create, id: answer, question_id: question, answer: attributes_for(:answer)
-        expect(Answer.last.user_id).to eq @user.id
-      end
-      it 'should assign question to @answer' do
-        post :create, id: answer, question_id: question, answer: attributes_for(:answer)
-        expect(Answer.last.question_id).to eq question.id
+          expect { post :create, id: answer, question_id: question, answer: attributes_for(:answer) }.to change(@user.answers, :count).by(1)
       end
     end
 
@@ -30,7 +25,7 @@ RSpec.describe AnswersController, type: :controller do
       end
       it 're-render new create' do
         post :create, id: answer, question_id: question, answer: attributes_for(:invalid_answer)
-        expect(response).to redirect_to question 
+        expect(response).to render_template 'questions/show'
       end
     end
   end

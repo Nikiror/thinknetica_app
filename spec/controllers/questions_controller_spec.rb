@@ -45,17 +45,12 @@ let(:question) { question = create(:question) }
     sign_in_user
     context 'with valid attributes' do
       it 'save the new question in database' do
-        expect { post :create, question: attributes_for(:question) }.to change(Question, :count).by(1)
+        expect { post :create, question: attributes_for(:question) }.to change(@user.questions, :count).by(1)
       end
       it 'redirect to show view' do
         post :create, question: attributes_for(:question)
         expect(response).to redirect_to question_path(assigns(:question))
       end
-       it 'should assign user to @question' do
-        post :create, question: attributes_for(:question)
-        expect(Question.last.user_id).to eq @user.id
-      end
-      
     end
 
     context 'with invalid attributes' do
@@ -120,7 +115,6 @@ let(:question) { question = create(:question) }
 
        context 'Non-author of answer' do
         it 'cant delete question' do
-          question
           expect { delete :destroy, id: question }.to_not change(Question, :count)
         end
       end

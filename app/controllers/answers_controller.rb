@@ -11,7 +11,7 @@ class AnswersController < ApplicationController
       redirect_to @answer.question
     else
       flash[:alert] = 'Cant create answer!'
-      redirect_to @answer.question
+      render 'questions/show'
     end
   end
 
