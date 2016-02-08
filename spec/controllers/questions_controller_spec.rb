@@ -28,7 +28,10 @@ let(:question) { question = create(:question) }
   end
 
   describe "GET #new" do
+    sign_in_user
+
     before {get :new}
+
     it 'assign a new Question to @question' do
       expect(assigns(:question)).to be_a_new(Question)
     end
@@ -39,9 +42,10 @@ let(:question) { question = create(:question) }
   end
 
   describe 'POST #create' do
+    sign_in_user
     context 'with valid attributes' do
       it 'save the new question in database' do
-        expect { post :create, question: attributes_for(:question) }.to change(Question, :count).by(1)
+        expect { post :create, question: attributes_for(:question) }.to change(@user.questions, :count).by(1)
       end
       it 'redirect to show view' do
         post :create, question: attributes_for(:question)
@@ -61,6 +65,7 @@ let(:question) { question = create(:question) }
   end
 
   describe 'PATCH #update' do
+    sign_in_user
     context 'with valid attributes' do
       it 'assigns requsted question to @question' do
         patch :update, id: question, question: attributes_for(:question)
@@ -84,20 +89,35 @@ let(:question) { question = create(:question) }
       it 'does not change question attributes' do
         patch :update, id: question, question: { title: "new title", body: nil }
         question.reload
-        expect(question.title).to eq 'MyString'
-        expect(question.body).to eq 'MyText'
+        expect(question.title).to eq question.title
+        expect(question.body).to eq question.body
       end
     end
   end
-  describe 'DELETE #destroy' do
-    before { question }
-    it 'delete question' do
-      expect { delete :destroy, id: question }.to change(Question, :count).by(-1)
-    end
 
-    it 'redirect to index view' do
-      delete :destroy, id: question
-      expect(response).to redirect_to questions_path
+  describe 'DELETE #destroy' do
+    context 'Authenticated user' do
+      sign_in_user
+      before { question }
+
+      context 'Author of answer' do
+        let!(:my_question) { create(:question, user: @user) }
+
+        it 'delete question' do
+          expect { delete :destroy, id: my_question }.to change(@user.questions, :count).by(-1)
+        end
+
+        it 'redirect to index view' do
+          delete :destroy, id: my_question
+          expect(response).to redirect_to questions_path
+        end
+      end
+
+       context 'Non-author of answer' do
+        it 'cant delete question' do
+          expect { delete :destroy, id: question }.to_not change(Question, :count)
+        end
+      end
     end
   end
 end

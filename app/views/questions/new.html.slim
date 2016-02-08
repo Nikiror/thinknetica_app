@@ -1,0 +1,7 @@
+= form_for @question do |f|
+  = f.label :title
+  = f.text_field :title
+  br
+  = f.label :body, 'Text'
+  = f.text_area :body
+  = f.submit 'Create'

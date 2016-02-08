@@ -1,0 +1,26 @@
+p
+  b Title:
+  = @question.title
+p 
+  b Body:
+  = @question.body
+  - if current_user && current_user.author_of?(@question)
+    = link_to('Delete question', @question, method: :delete)
+h2 Answers:
+- @question.answers.each do |answer| 
+  h3 
+    = answer.content
+    - if current_user && current_user.author_of?(answer)
+      = link_to('Delete answer', [@question, answer], method: :delete) 
+    br
+- if user_signed_in?
+  h2 Post your Answer:
+  = form_for [@question, Answer.new] do |f|
+    = f.label :content
+    br
+    = f.text_area :content
+    br
+    = f.submit 'Create answer'
+
+
+

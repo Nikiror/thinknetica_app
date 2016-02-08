@@ -32,6 +32,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 gem 'slim-rails'
+gem 'devise'
+gem 'bootstrap-sass' 
+gem 'bootstrap-sass-extras'
 
 group :development, :test do
   gem 'byebug'
@@ -41,8 +44,10 @@ end
 
 group :test do
   gem 'shoulda-matchers'
+  gem 'capybara'
+  gem 'launchy'
 end
-    gem 'responders'
+  gem 'responders'
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
