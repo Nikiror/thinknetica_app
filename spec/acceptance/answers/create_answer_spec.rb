@@ -1,4 +1,4 @@
-require 'rails_helper'
+require_relative '../../acceptance/acceptance_helper'
 
 feature 'Create answers to question', %q{
   In order to help 

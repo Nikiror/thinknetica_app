@@ -1,4 +1,4 @@
-require 'rails_helper'
+require_relative '../../acceptance/acceptance_helper'
 
 feature 'Delete question', %q{
   As an authenticated user

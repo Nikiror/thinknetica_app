@@ -1,4 +1,4 @@
-require 'rails_helper'
+require_relative '../../acceptance/acceptance_helper'
 
 feature 'Create question', %q{
   In order to get answer from community
