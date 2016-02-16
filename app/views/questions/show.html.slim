@@ -10,7 +10,9 @@ h2 Answers:
 .answers
   = render @question.answers
 - if user_signed_in?
+
   h2 Post your Answer:
+  .answers-errors
   = form_for [@question, @answer], remote: true do |f|
     = f.label :content
     br

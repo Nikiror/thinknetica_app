@@ -28,4 +28,10 @@ feature 'Create answers to question', %q{
 
     expect(page).to_not have_content 'Post your Answer'
   end
+  scenario "User try to create invalid answer", js: true do
+    sign_in(user)
+    visit question_path(question)
+    click_on 'Create answer'
+    expect(page).to have_content "Content can't be blank"
+  end
 end
