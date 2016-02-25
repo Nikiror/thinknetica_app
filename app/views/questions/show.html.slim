@@ -1,24 +1,17 @@
 p
-  b Title:
-  = @question.title
-p 
-  b Body:
-  = @question.body
-  - if current_user && current_user.author_of?(@question)
-    = link_to('Delete question', @question, method: :delete)
+  .question
+    = render @question
 h2 Answers:
 .answers
   = render @question.answers
-- if user_signed_in?
 
+- if user_signed_in?
   h2 Post your Answer:
-  .answers-errors
   = form_for [@question, @answer], remote: true do |f|
     = f.label :content
-    br
+    .answers-errors
     = f.text_area :content
-    br
-    = f.submit 'Create answer'
+    p= f.submit 'Create answer'
 
 
 

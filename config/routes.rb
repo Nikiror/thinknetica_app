@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   root to: 'questions#index'
   
   resources :questions do
-    resources :answers
+    resources :answers do
+      member do
+        post 'best'
+      end
+    end
   end
   
   # The priority is based upon order of creation: first created -> highest priority.
