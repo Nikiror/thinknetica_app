@@ -1,0 +1,5 @@
+    h3 
+      = answer.content
+      - if current_user && current_user.author_of?(answer)
+        = link_to('Delete answer', [@question, answer], method: :delete) 
+      br
