@@ -21,7 +21,7 @@ class AnswersController < ApplicationController
     else
       flash[:alert] = 'You cant delete this answer!'
     end
-    redirect_to @answer.question
+    #redirect_to @answer.question
   end
 
   def best
