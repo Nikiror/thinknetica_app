@@ -1,19 +1,19 @@
-require 'rails_helper'
+require_relative '../../acceptance/acceptance_helper'
 
 feature 'Delete question', %q{
   As an authenticated user
-  I want to be able to delete his question and answers 
+  I want to be able to delete his question
 } do        
   given(:user) { create(:user) }
   given(:other_user) { create(:user) }
   given!(:question){ create(:question, user: user) }
   given!(:other_question){ create(:question, user: other_user) }
 
-  scenario 'Authenticated user delete his question and answers' do
+  scenario 'Authenticated user delete his question' do
     sign_in(user)
 
     visit question_path(question)
-    click_on 'Delete question'
+    click_on 'Delete'
  
     expect(page).to have_content 'Your question successfully deleted.'
     expect(current_path).to eq questions_path
