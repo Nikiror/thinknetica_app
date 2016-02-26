@@ -3,7 +3,7 @@ p= question.title
 b Body:
 p= question.body
 - if current_user && current_user.author_of?(question)
-  p= link_to('Delete question', question, method: :delete)
+  p= link_to 'Delete question', question, method: :delete)
   p= link_to 'Edit','', class: 'edit-question-link'
   = form_for question, remote: true, html: { id: "edit-question"} do |f|
     p= f.label :title, 'Title'

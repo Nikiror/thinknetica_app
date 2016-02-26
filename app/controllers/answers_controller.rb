@@ -21,14 +21,13 @@ class AnswersController < ApplicationController
     else
       flash[:alert] = 'You cant delete this answer!'
     end
-    #redirect_to @answer.question
+    redirect_to @answer.question
   end
 
   def best
     @question = @answer.question
     if current_user.author_of?(@question) && !@answer.best?
       @answer.make_best
-
       flash[:notice] = "This answer choose as best!"
     end
   end

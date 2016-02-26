@@ -6,6 +6,7 @@ class Answer < ActiveRecord::Base
   default_scope { order(best: :desc) }
 
   def make_best
+    if !answer.best?
     transaction do
       question.answers.update_all(best: false)
       update!(best: true)
