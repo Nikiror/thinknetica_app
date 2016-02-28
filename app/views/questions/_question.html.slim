@@ -2,6 +2,12 @@ b Title:
 p= question.title
 b Body:
 p= question.body
+b Attachments:
+ul
+  -question.attachments.each do |f|
+    li = link_to f.file.identifier, f.file.url
+  end
+
 - if current_user && current_user.author_of?(question)
   p= link_to 'Delete question', question, method: :delete
   p= link_to 'Edit','', class: 'edit-question-link'
