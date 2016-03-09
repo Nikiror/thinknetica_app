@@ -5,7 +5,10 @@ p= question.body
 b Attachments:
 ul
   -question.attachments.each do |f|
-    li = link_to f.file.identifier, f.file.url
+    li id="attachment-#{f.id}" class="attachment"
+      p= link_to f.file.identifier, f.file.url
+      - if current_user && current_user.author_of?(question)
+        p= link_to "Delete file",  attachment_path(f), method: :delete, remote: true
   end
 
 - if current_user && current_user.author_of?(question)

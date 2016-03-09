@@ -48,7 +48,7 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.4.0)
     arel (6.0.3)
-    bcrypt (3.1.10)
+    bcrypt (3.1.11)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
@@ -68,6 +68,7 @@ GEM
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
+    cocoon (1.2.8)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.1.x)
@@ -76,7 +77,7 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     commonjs (0.2.7)
-    concurrent-ruby (1.0.0)
+    concurrent-ruby (1.0.1)
     database_cleaner (1.5.1)
     debug_inspector (0.0.2)
     devise (3.5.6)
@@ -118,7 +119,7 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
-    mime-types (2.99)
+    mime-types (2.99.1)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     multi_json (1.11.2)
@@ -153,12 +154,13 @@ GEM
       activesupport (= 4.2.5)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (10.5.0)
+    rake (11.0.1)
     rdoc (4.2.2)
       json (~> 1.4)
+    remotipart (1.2.1)
     responders (2.1.1)
       railties (>= 4.2.0, < 5.1)
-    rspec-core (3.4.3)
+    rspec-core (3.4.4)
       rspec-support (~> 3.4.0)
     rspec-expectations (3.4.0)
       diff-lcs (>= 1.2.0, < 2.0)
@@ -196,11 +198,11 @@ GEM
       activesupport (>= 3.1, < 5.0)
       railties (>= 3.1, < 5.0)
       slim (~> 3.0)
-    spring (1.6.3)
+    spring (1.6.4)
     sprockets (3.5.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
-    sprockets-rails (3.0.1)
+    sprockets-rails (3.0.4)
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
@@ -233,6 +235,7 @@ DEPENDENCIES
   capybara
   capybara-webkit
   carrierwave
+  cocoon
   coffee-rails (~> 4.1.0)
   database_cleaner
   devise
@@ -242,6 +245,7 @@ DEPENDENCIES
   launchy
   pg (~> 0.15)
   rails (= 4.2.5)
+  remotipart
   responders
   rspec-rails
   sass-rails (~> 5.0)

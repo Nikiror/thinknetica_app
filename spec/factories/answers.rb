@@ -8,7 +8,7 @@ FactoryGirl.define do
     user
   end
 
-   factory :invalid_answer, class: "Answer" do
+  factory :invalid_answer, class: "Answer" do
     content nil
     question
     user

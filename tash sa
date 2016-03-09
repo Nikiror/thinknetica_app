@@ -1,0 +1,23 @@
+[33mcommit db166d0a85422d099cec4f1613bba0d8d53fa0af[m
+Author: Nikita Nikolaevsky <nikiror@gmail.com>
+Date:   Sun Feb 28 17:44:52 2016 +0800
+
+    polymorphic attachments for questions ans answers
+
+[33mcommit 87d946a4cac4e233a981d60ae412fd2fb432ee97[m
+Author: Nikita Nikolaevsky <nikiror@gmail.com>
+Date:   Sun Feb 28 17:16:11 2016 +0800
+
+    refactoring
+
+[33mcommit f87a8b810cb30dce89d500a82921efd658e20ddd[m
+Author: Nikita Nikolaevsky <nikiror@gmail.com>
+Date:   Sun Feb 28 17:09:24 2016 +0800
+
+    Add files to Question
+
+[33mcommit e010a5908bb62177346e8dbf1e4fd8d0c40cad8f[m
+Author: Nikita Nikolaevsky <nikiror@gmail.com>
+Date:   Fri Feb 26 22:37:37 2016 +0800
+
+    Question accepted nested attribbutes for attachments
