@@ -16,7 +16,6 @@ feature 'Add files to answer', %q{
 
   scenario 'User adds file when answer', js: true do
     fill_in 'Content', with: "test answer 1923"
-    save_and_open_page
     attach_file 'File', "#{Rails.root}/spec/spec_helper.rb"
     click_on 'Create answer'
 

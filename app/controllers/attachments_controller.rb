@@ -2,7 +2,11 @@ class AttachmentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_attachment, only: :destroy
   def destroy
-    @attachment.destroy if current_user.author_of?(@attachment.attachable)
+    if current_user.author_of?(@attachment.attachable)
+      @attachment.destroy
+    else
+      head(:forbidden)
+    end
   end
 
   private
