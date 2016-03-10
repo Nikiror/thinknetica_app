@@ -1,7 +1,14 @@
 = form_for @question do |f|
-  = f.label :title
-  = f.text_field :title
-  br
-  = f.label :body, 'Text'
-  = f.text_area :body
+  p
+    = f.label :title
+    = f.text_field :title
+  p
+    = f.label :body, 'Text'
+    = f.text_area :body
+  p Attachments:
+  p
+    = f.fields_for :attachments do |a|
+      = render 'attachments/attachment_fields', f: a
+    .links
+      = link_to_add_association 'Add file', f, :attachments, partial: 'attachments/attachment_fields'
   = f.submit 'Create'

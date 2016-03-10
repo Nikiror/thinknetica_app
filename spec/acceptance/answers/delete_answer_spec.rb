@@ -33,7 +33,6 @@ feature 'Delete answer', %q{
 
     scenario 'try to delete his answer', js: true do
       within ".answers" do
-        save_and_open_page
         click_on 'Delete'
         expect(page).to_not have_content answer.content
       end

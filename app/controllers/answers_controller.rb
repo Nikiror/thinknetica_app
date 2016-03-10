@@ -28,7 +28,6 @@ class AnswersController < ApplicationController
     @question = @answer.question
     if current_user.author_of?(@question) && !@answer.best?
       @answer.make_best
-
       flash[:notice] = "This answer choose as best!"
     end
   end
@@ -43,6 +42,6 @@ private
   end
 
   def answer_params
-    params.require(:answer).permit(:content)
+    params.require(:answer).permit(:content, attachments_attributes: [:id, :file, :_destroy])
   end
 end

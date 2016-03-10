@@ -1,6 +1,15 @@
 - if answer.persisted?
   .answer id="answer-#{answer.id}"
     = answer.content
+    p
+    b Attachments:
+    ul
+      - answer.attachments.each do |f|
+        li id="attachment-#{f.id}" class="attachment"
+          p= link_to f.file.identifier, f.file.url
+          - if current_user && current_user.author_of?(answer)
+            p= link_to "Delete file", f, method: :delete, remote: true
+      end
     - if current_user && current_user.author_of?(answer)
       p= link_to 'Delete', question_answer_path(@question, answer), method: :delete, remote: true
       p= link_to 'Edit', '', class: 'edit-answer-link', data: { answer_id: answer.id }

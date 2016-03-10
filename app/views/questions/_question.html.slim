@@ -2,8 +2,17 @@ b Title:
 p= question.title
 b Body:
 p= question.body
+b Attachments:
+ul
+  -question.attachments.each do |f|
+    li id="attachment-#{f.id}" class="attachment"
+      p= link_to f.file.identifier, f.file.url
+      - if current_user && current_user.author_of?(question)
+        p= link_to "Delete file",  attachment_path(f), method: :delete, remote: true
+  end
+
 - if current_user && current_user.author_of?(question)
-  p= link_to('Delete question', question, method: :delete)
+  p= link_to 'Delete question', question, method: :delete
   p= link_to 'Edit','', class: 'edit-question-link'
   = form_for question, remote: true, html: { id: "edit-question"} do |f|
     p= f.label :title, 'Title'
