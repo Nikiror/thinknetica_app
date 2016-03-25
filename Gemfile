@@ -35,15 +35,18 @@ gem 'slim-rails'
 gem 'devise'
 gem 'twitter-bootstrap-rails', git: 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'carrierwave'
-gem 'remotipart'
+gem 'remotipart', '~> 1.2'
 gem 'cocoon'
+
 
 group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'capybara-webkit'
+  gem 'selenium-webdriver'
   gem 'database_cleaner'
+
 end
 
 group :test do

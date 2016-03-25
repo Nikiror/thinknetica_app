@@ -2,19 +2,14 @@ doctype html
 html
   head
     title Stackoverflow
-    = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"
-    = stylesheet_link_tag "application", :media => "all"
-    = javascript_include_tag "application"
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   body
     .navbar.navbar-fixed-top
       .navbar-inner
         .container
-          a.btn.btn-navbar data-target=".nav-collapse" data-toggle="collapse"
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          = link_to "QnA", root_path, class: 'brand'
+          = link_to "QnA", root_path
           .container.nav-collapse
             ul.nav
             - if user_signed_in?
