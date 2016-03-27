@@ -11,6 +11,6 @@ class User < ActiveRecord::Base
     item.user_id == self.id
   end
   def voted?(post)
-    votes.find_by(user: self, votable: post)
+    votes.where(user: self, votable: post).exists?
   end
 end

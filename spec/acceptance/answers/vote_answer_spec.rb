@@ -27,6 +27,9 @@ feature 'Vote for answer', %q{
         expect(page).to_not have_link 'Vote down'
         expect(page).to have_link 'Vote delete'
       end
+      within ".answer-vote-area .rating" do
+        expect(page).to have_content '1'
+      end
     end
 
     scenario 'try to vote up for answer, but later vote down', js: true do
@@ -37,6 +40,9 @@ feature 'Vote for answer', %q{
         expect(page).to_not have_link 'Vote up'
         expect(page).to_not have_link 'Vote down'
         expect(page).to have_link 'Vote delete'
+      end
+      within ".answer-vote-area .rating" do
+        expect(page).to have_content '-1'
       end
     end
   end

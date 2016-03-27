@@ -10,7 +10,6 @@ ready = ->
 
   $('.answers .vote-up,.answers .vote-down,.answers .vote-delete').bind 'ajax:success', (e, data, status, xhr) ->
     response = $.parseJSON(xhr.responseText)
-    $('.answer').addClass("dsdsd");
     if response.voted
       $('#answer-'+ response.post_id +' .vote-delete').removeClass('hide');
       $('#answer-'+ response.post_id +' .vote-up').addClass('hide');
