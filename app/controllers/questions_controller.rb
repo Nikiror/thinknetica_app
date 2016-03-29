@@ -21,19 +21,14 @@ class QuestionsController < ApplicationController
 
     @question = Question.new(question_params.merge(user: current_user))
 
-    respond_to do |format|
       if @question.save
-        format.js do
           PrivatePub.publish_to "/questions", question: @question.to_json
           #render nothing: true
           redirect_to @question
-        end
       else
         #format.json { render json: @answer.errors.full_messages, status: :unprocessable_entity }
         #format.js
       end
-    end
-
 
 
 #@question = Question.new(question_params.merge(user: current_user))

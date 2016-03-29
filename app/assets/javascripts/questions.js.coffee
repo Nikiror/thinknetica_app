@@ -19,6 +19,9 @@ ready = ->
       $('.question-vote-area .vote-up').removeClass('hide');
       $('.question-vote-area .vote-down').removeClass('hide');
     $('.question-vote-area .rating').text(response.rating)
+  PrivatePub.subscribe '/questions',(data, channel) ->
+    questionData = $.parseJSON(data['question'])
+    $('.questions').append(JST["templates/questions"]({question_data: questionData}))
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

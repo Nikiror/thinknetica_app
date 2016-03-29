@@ -39,6 +39,7 @@ gem 'remotipart', '~> 1.2'
 gem 'cocoon'
 gem 'private_pub'
 gem 'thin'
+gem 'skim'
 
 
 group :development, :test do
