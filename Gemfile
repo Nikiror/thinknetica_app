@@ -37,6 +37,8 @@ gem 'twitter-bootstrap-rails', git: 'git://github.com/seyhunak/twitter-bootstrap
 gem 'carrierwave'
 gem 'remotipart', '~> 1.2'
 gem 'cocoon'
+gem 'private_pub'
+gem 'thin'
 
 
 group :development, :test do

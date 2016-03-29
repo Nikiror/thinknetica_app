@@ -17,14 +17,33 @@ class QuestionsController < ApplicationController
     @question.attachments.build
   end
 
-  def create 
+  def create
+
     @question = Question.new(question_params.merge(user: current_user))
-    if @question.save
-      flash[:notice] = 'Your question successfully created.'
-      redirect_to @question
-    else
-      render :new
+
+    respond_to do |format|
+      if @question.save
+        format.js do
+          PrivatePub.publish_to "/questions", question: @question.to_json
+          #render nothing: true
+          redirect_to @question
+        end
+      else
+        #format.json { render json: @answer.errors.full_messages, status: :unprocessable_entity }
+        #format.js
+      end
     end
+
+
+
+#@question = Question.new(question_params.merge(user: current_user))
+    #if @question.save
+
+    #  flash[:notice] = 'Your question successfully created.'
+    # redirect_to @question
+    #else
+    #  render :new
+   # end
   end
 
   def update
