@@ -1,9 +1,12 @@
 - if answer.persisted?
   .answer id="answer-#{answer.id}"
-    = answer.content
-    p
+    p = answer.content
+    .answer-vote-area
+      = render 'votes/vote_answer', post: answer
+
     b Attachments:
     ul
+
       - answer.attachments.each do |f|
         li id="attachment-#{f.id}" class="attachment"
           p= link_to f.file.identifier, f.file.url
@@ -11,14 +14,14 @@
             p= link_to "Delete file", f, method: :delete, remote: true
       end
     - if current_user && current_user.author_of?(answer)
-      p= link_to 'Delete', question_answer_path(@question, answer), method: :delete, remote: true
+      p= link_to 'Delete', answer_path(answer), method: :delete, remote: true
       p= link_to 'Edit', '', class: 'edit-answer-link', data: { answer_id: answer.id }
     - if current_user && current_user.author_of?(answer.question) && !answer.best?
-      p= link_to 'Make best', best_question_answer_path(@question, answer), method: :post, class: 'make-best-answer-link', remote: true
+      p= link_to 'Make best', best_answer_path(answer), method: :post, class: 'make-best-answer-link', remote: true
     - if answer.best?
       p= "Best answer!"
     - if current_user && current_user.author_of?(answer)
-      p= form_for [@question, answer], remote: true, html: { id: "edit-answer-#{answer.id}"} do |f|
+      p= form_for [answer], remote: true, html: { id: "edit-answer-#{answer.id}"} do |f|
         = f.label :content, 'Answer'
         p= f.text_area :content
         p= f.submit 'Save'

@@ -1,0 +1,21 @@
+p = "Vote"
+- if user_signed_in?
+  - if current_user.author_of?(post)
+      p = post.votes.rating
+  - else
+    - if current_user.voted?(post)
+      p= link_to 'Vote up', vote_up_question_path(post), class: 'vote-up hide',  method: :patch, data: { format: :json }, remote: true
+      p= link_to 'Vote down', vote_down_question_path(post), class: 'vote-down hide', method: :patch, data: { format: :json }, remote: true
+      p= link_to 'Vote delete', vote_reset_question_path(post), class: 'vote-delete', method: :delete, data: { format: :json }, remote: true
+      .rating
+        p = post.votes.rating
+    -else
+      p= link_to 'Vote up', vote_up_question_path(post), class: 'vote-up', method: :patch, data: {format: :json}, remote: true
+      p= link_to 'Vote down', vote_down_question_path(post), class: 'vote-down', method: :patch, data: {format: :json}, remote: true
+      p= link_to 'Vote delete', vote_reset_question_path(post), class: 'vote-delete hide', method: :delete, data: {format: :json}, remote: true
+      .rating
+        p = post.votes.rating
+
+- else
+  .rating
+    p = post.votes.rating

@@ -1,5 +1,7 @@
 b Title:
 p= question.title
+.question-vote-area
+  = render 'votes/vote_question', post: @question
 b Body:
 p= question.body
 b Attachments:
@@ -10,7 +12,6 @@ ul
       - if current_user && current_user.author_of?(question)
         p= link_to "Delete file",  attachment_path(f), method: :delete, remote: true
   end
-
 - if current_user && current_user.author_of?(question)
   p= link_to 'Delete question', question, method: :delete
   p= link_to 'Edit','', class: 'edit-question-link'

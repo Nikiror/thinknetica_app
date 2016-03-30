@@ -31,7 +31,7 @@ feature 'Add files to answer', %q{
 
     page.all(:file_field, 'File').first.set("#{Rails.root}/spec/spec_helper.rb")
     page.all(:file_field, 'File').last.set("#{Rails.root}/spec/rails_helper.rb")
-
+    $stdin.gets
     click_on 'Create answer'
 
     expect(page).to have_link 'rails_helper.rb', href: '/uploads/attachment/file/1/rails_helper.rb'
