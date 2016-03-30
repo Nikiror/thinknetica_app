@@ -1,5 +1,6 @@
+.errors
 p
-  .question
+  .question id="question-#{@question.id}"
     = render 'form', question: @question
 h2 Answers:
 .answers
@@ -19,5 +20,5 @@ h2 Answers:
     p= f.submit 'Create answer'
 
 = subscribe_to "/questions/#{@question.id}/answers"
-
+= subscribe_to "/questions/#{@question.id}/comments"
 

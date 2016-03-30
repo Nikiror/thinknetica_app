@@ -23,22 +23,11 @@ class QuestionsController < ApplicationController
 
       if @question.save
           PrivatePub.publish_to "/questions", question: @question.to_json
-          #render nothing: true
           redirect_to @question
+          flash[:notice] = 'Your question successfully created.'
       else
-        #format.json { render json: @answer.errors.full_messages, status: :unprocessable_entity }
-        #format.js
+        render :new
       end
-
-
-#@question = Question.new(question_params.merge(user: current_user))
-    #if @question.save
-
-    #  flash[:notice] = 'Your question successfully created.'
-    # redirect_to @question
-    #else
-    #  render :new
-   # end
   end
 
   def update
