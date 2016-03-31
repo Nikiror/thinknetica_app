@@ -1,6 +1,7 @@
+.errors
 p
-  .question
-    = render @question
+  .question id="question-#{@question.id}"
+    = render 'form', question: @question
 h2 Answers:
 .answers
   = render @question.answers
@@ -18,5 +19,6 @@ h2 Answers:
       = link_to_add_association 'Add file', f, :attachments, partial: 'attachments/attachment_fields'
     p= f.submit 'Create answer'
 
-
+= subscribe_to "/questions/#{@question.id}/answers"
+= subscribe_to "/questions/#{@question.id}/comments"
 

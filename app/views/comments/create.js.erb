@@ -1,0 +1,15 @@
+<% if @comment.errors.present? %>
+  <% @comment.errors.full_messages.each do |message| %>
+    $('.errors').append('<%= j message %>');
+  <% end %>
+<% else %>
+<% ownerId = "##{@comment.commentable_type.underscore}-#{@comment.commentable.id}" %>
+  <% publish_to "/#{@comment.commentable_type.pluralize.underscore}/#{@comment.commentable.id}/comments" do %>
+    $('<%= ownerId%> .comments').append("<%= j render @comment %>");
+  <% end %>
+
+  $('<%= ownerId%> .new-comment-form').val('');
+  $('<%= ownerId%> .new-comment-form').hide();
+  $('<%= ownerId%> .new-comment-link').show();
+
+<% end %>

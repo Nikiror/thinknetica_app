@@ -3,7 +3,7 @@
     $(".question-errors").before('<%= j message %>')
   <% end %>
 <% else %>
-  $('.question').replaceWith('<%= j render @question %>');
+  $('.question').replaceWith("<%= j render 'form', question: @question %>");
   $('.edit-question-link').click(function(e) {
     e.preventDefault();
     $(this).hide();

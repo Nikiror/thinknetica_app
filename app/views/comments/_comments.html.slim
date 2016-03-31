@@ -1,0 +1,13 @@
+.comments
+  p= "Comments"
+  - commentable.comments.each do |comment|
+    - if comment.persisted?
+      = render comment
+  - if user_signed_in?
+    p= link_to 'Add a comment', '', class: 'new-comment-link', data: { commentable_id: commentable.id, commentowner: "#{commentable.class.name.underscore}-#{commentable.id}"  }
+    .new-comment
+      = form_for [commentable, commentable.comments.new], html: { class: 'new-comment-form' }, remote: true do |f|
+        .question-comment-errors
+        = f.label :body, 'Body'
+        = f.text_area :body
+        = f.submit 'Post comment'
