@@ -2,16 +2,13 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_commentable, only: :create
   before_action :load_comment, only: :destroy
+  respond_to :js
   def create
-    @comment = @commentable.comments.new(comment_params.merge(user: current_user))
-    @comment.save
+    respond_with(@comment = @commentable.comments.create(comment_params.merge!(user_id: current_user.id)))
   end
+
   def destroy
-    if current_user.author_of?(@comment)
-      @comment.destroy
-    else
-      flash[:alert] = 'You cant delete this comment!'
-    end
+    respond_with(@comment.destroy)
   end
   private
 

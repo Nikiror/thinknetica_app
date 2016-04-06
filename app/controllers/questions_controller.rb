@@ -1,56 +1,49 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :load_question, only: [:update, :show, :destroy]
+  before_action :load_answer, only: :show
+  before_action :publish_questiom, only: :create
   include Voted
+  respond_to :html, :json, :js
 
   def index
-    @questions = Question.all
+    respond_with(@questions = Question.all)
   end
 
   def show
-    @answer = @question.answers.build
-    @answer.attachments.build
+    respond_with @question
   end 
 
   def new
-    @question  = Question.new
-    @question.attachments.build
+    respond_with(@question  = Question.new)
   end
 
   def create
-
-    @question = Question.new(question_params.merge(user: current_user))
-
-      if @question.save
-          PrivatePub.publish_to "/questions", question: @question.to_json
-          redirect_to @question
-          flash[:notice] = 'Your question successfully created.'
-      else
-        render :new
-      end
+    respond_with(@question = current_user.questions.create(question_params))
   end
 
   def update
-    if current_user.author_of?(@question)
-      @question.update(question_params)
-    end
+    @question.update(question_params)
+    respond_with @question
   end
 
   def destroy
-    if current_user.author_of?(@question)
-      @question.destroy
-      flash[:notice] = 'Your question successfully deleted.'
-    else
-      flash[:alert] = 'You cant delete this question!'
-    end
-    redirect_to questions_path
+    @question.destroy
+    respond_with(@question)
   end
 
-  private 
+  private
+
+  def load_answer
+    @answer = @question.answers.build
+  end
+
   def load_question
     @question = Question.find(params[:id])
   end
-
+  def publish_questiom
+    PrivatePub.publish_to('/questions', question: @question.to_json)
+  end
   def question_params
     params.require(:question).permit(:title, :body, attachments_attributes: [:id, :file, :_destroy])
   end
