@@ -40,7 +40,7 @@ gem 'cocoon'
 gem 'private_pub'
 gem 'thin'
 gem 'skim'
-
+gem 'responders'
 
 group :development, :test do
   gem 'byebug'
@@ -57,7 +57,6 @@ group :test do
   gem 'capybara'
   gem 'launchy'
 end
-  gem 'responders'
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views

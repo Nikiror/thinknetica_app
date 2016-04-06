@@ -13,7 +13,7 @@ h2 Answers:
     .answers-errors
     = f.text_area :content
     p Attachments:
-    = f.fields_for :attachments do |a|
+    = f.fields_for :attachments,  @answer.attachments.build do |a|
       = render 'attachments/attachment_fields', f: a
       .links
       = link_to_add_association 'Add file', f, :attachments, partial: 'attachments/attachment_fields'

@@ -37,9 +37,6 @@ RSpec.describe QuestionsController, type: :controller do
     it 'assign a new Question to @question' do
       expect(assigns(:question)).to be_a_new(Question)
     end
-    it 'builds new attachments to Question' do
-      expect(assigns(:question).attachments.first).to be_a_new(Attachment)
-    end
     it 'renders show new' do
       expect(response).to render_template(:new)
     end
@@ -71,7 +68,7 @@ RSpec.describe QuestionsController, type: :controller do
   describe 'PATCH #update' do
     context "with authenticated user" do
       sign_in_user
-    let!(:another_question) { create(:question, user: @user) }
+      let!(:another_question) { create(:question, user: @user) }
       context "Author" do
         context 'with valid attributes' do
           it 'assigns requsted question to @question' do
@@ -114,6 +111,7 @@ RSpec.describe QuestionsController, type: :controller do
     end
   end
 
+
   describe 'DELETE #destroy' do
     context 'Authenticated user' do
       sign_in_user
@@ -132,7 +130,7 @@ RSpec.describe QuestionsController, type: :controller do
         end
       end
 
-       context 'Non-author of answer' do
+      context 'Non-author of answer' do
         it 'cant delete question' do
           expect { delete :destroy, id: question }.to_not change(Question, :count)
         end

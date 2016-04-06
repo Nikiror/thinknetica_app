@@ -3,25 +3,20 @@ class AnswersController < ApplicationController
   before_action :load_question, only: [:create, :update]
   before_action :load_answer, only:[:update, :destroy, :best]
   include Voted
+  respond_to :js
 
   def create
-    @answer  = @question.answers.new(answer_params.merge(user: current_user))
-    @answer.save
+    respond_with(@answer = @question.answers.create(answer_params.merge!(user_id: current_user.id)))
   end
 
   def update
-    if current_user.author_of?(@answer)
-      @answer.update(answer_params)
-    end
+    @answer.update(answer_params)
+    respond_with @answer
   end
 
   def destroy
-    if current_user.author_of?(@answer)
-      @answer.destroy
-    else
-      flash[:alert] = 'You cant delete this answer!'
-    end
-    #redirect_to @answer.question
+    @question = @answer.question
+    respond_with(@answer.destroy)
   end
 
   def best
@@ -40,7 +35,6 @@ private
   def load_question
     @question = Question.find(params[:question_id])
   end
-
   def answer_params
     params.require(:answer).permit(:content, attachments_attributes: [:id, :file, :_destroy])
   end
